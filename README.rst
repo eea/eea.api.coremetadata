@@ -16,9 +16,17 @@ The eea.api.coremetadata is a Plone add-on
 Main features
 =============
 
-1. Easy to install/uninstall via Site Setup > Add-ons
-2.
-3.
+This product provides a Plone REST API endpoint called @metadata and available for all dexterity
+content-types providing the `EEA Core Metadata`_. This metadata endpoint is expandable_.
+
+The basic implementation provides generic metadata for both the Plone Site and basic Dexterity
+content-type. If you need to provide this metadata information from some other fields in your
+specific content-types, you can provide a ZCA adapter for your content-type.
+
+You can look at `eea.restapi.coremetadata.api.servidces.metadata.adapters.dexterity` and inherit
+the default BaseDexterityCoreMetadataAdapter to provide your own. Do not forget to register the
+adapter in ZCML, look at the configure.zcml file in the same folder to know how to register it.
+
 
 Install
 =======
@@ -39,7 +47,7 @@ Install
 
     $ docker run --rm -p 8080:8080 -e ADDONS="eea.api.coremetadata" plone
 
-* Install *eea.api.coremetadata* within Site Setup > Add-ons
+* You do not need to install this product through the Plone Add-ons Control Panel, it is available right away
 
 
 Buildout installation
