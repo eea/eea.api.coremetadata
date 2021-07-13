@@ -18,10 +18,12 @@ class EEAFixture(PloneSandboxLayer):
 
         self.loadZCML(package=eea.api.coremetadata)
         z2.installProduct(app, "eea.api.coremetadata")
+        z2.installProduct(app, "plone.restapi")
 
     def setUpPloneSite(self, portal):
         """Setup Plone"""
         # applyProfile(portal, "eea.api.coremetadata:default")
+        applyProfile(portal, "plone.restapi:default")
 
         # Default workflow
         wftool = portal["portal_workflow"]

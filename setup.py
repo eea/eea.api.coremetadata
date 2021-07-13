@@ -43,6 +43,8 @@ setup(
         "setuptools",
         # -*- Extra requirements: -*-
         "plone.dexterity",
+        "plone.restapi",
+        "Products.CMFPlone",
     ],
     extras_require={
         "test": [
