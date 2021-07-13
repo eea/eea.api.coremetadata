@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+""" Base core metadata adapter for dexterity content-types """
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.interface import implementer

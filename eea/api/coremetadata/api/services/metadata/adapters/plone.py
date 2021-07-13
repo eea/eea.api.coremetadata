@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+""" Base metadata adapter for a Plone site """
 from zope.component import adapter
 from zope.interface import implementer
 
@@ -19,9 +20,6 @@ class PloneSiteCoreMetadataAdapter(BaseDexterityCoreMetadataAdapter):
     from this, modify the relevant method and register the adapter for
     your content-type.
     """
-
-    def __init__(self, context):
-        self.context = context
 
     def title(self):
         """ see ICoreMetadata"""
