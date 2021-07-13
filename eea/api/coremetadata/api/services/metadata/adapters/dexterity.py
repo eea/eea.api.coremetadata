@@ -4,7 +4,9 @@ from zope.component import getMultiAdapter
 from zope.interface import implementer
 from zope.interface import providedBy
 
-from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
+from plone.app.contenttypes.behaviors.leadimage import (
+    ILeadImageBehavior,
+)
 from plone.dexterity.content import CEILING_DATE
 from plone.dexterity.content import FLOOR_DATE
 from plone.dexterity.interfaces import IDexterityContent
@@ -16,8 +18,9 @@ from .interfaces import ICoreMetadata
 @adapter(IDexterityContent)
 class BaseDexterityCoreMetadataAdapter(object):
     """This is the base core metadata adapter.
-    When building a custom adapter for your content-type, just inherit from this,
-    modify the relevant method and register the adapter for your content-type.
+    When building a custom adapter for your content-type, just inherit from
+    this, modify the relevant method and register the adapter for your
+    content-type.
     """
 
     def __init__(self, context):

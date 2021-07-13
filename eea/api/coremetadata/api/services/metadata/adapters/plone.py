@@ -15,8 +15,9 @@ from .interfaces import ICoreMetadata
 @adapter(IPloneSiteRoot)
 class PloneSiteCoreMetadataAdapter(BaseDexterityCoreMetadataAdapter):
     """This is the base core metadata adapter.
-    When building a custom adapter for your content-type, just inherit from this,
-    modify the relevant method and register the adapter for your content-type.
+    When building a custom adapter for your content-type, just inherit
+    from this, modify the relevant method and register the adapter for
+    your content-type.
     """
 
     def __init__(self, context):
