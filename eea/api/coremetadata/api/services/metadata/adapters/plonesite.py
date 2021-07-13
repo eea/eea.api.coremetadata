@@ -3,13 +3,19 @@
 from zope.component import adapter
 from zope.interface import implementer
 
+from plone import api
 from plone.dexterity.content import CEILING_DATE
 from plone.dexterity.content import FLOOR_DATE
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFPlone.utils import getSiteLogo
 
 from .dexterity import BaseDexterityCoreMetadataAdapter
 from .interfaces import ICoreMetadata
+
+
+try:
+    from Products.CMFPlone.utils import getSiteLogo
+except ImportError:
+    getSiteLogo = None
 
 
 @implementer(ICoreMetadata)
@@ -77,4 +83,7 @@ class PloneSiteCoreMetadataAdapter(BaseDexterityCoreMetadataAdapter):
 
     def depiction(self):
         """ see ICoreMetadata"""
-        return getSiteLogo()
+        if getSiteLogo is not None:
+            return getSiteLogo()
+        else:
+            return "{}/logo.png".format(api.portal.get().absolute_url())
