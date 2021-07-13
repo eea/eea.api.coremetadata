@@ -109,3 +109,5 @@ EEA_ - European Environment Agency (EU)
 
 .. _EEA: https://www.eea.europa.eu/
 .. _`EEA Web Systems Training`: http://www.youtube.com/user/eeacms/videos?view=1
+.. _``EEA Core Metadata`: https://taskman.eionet.europa.eu/projects/netpub/wiki/EEA_Core_Metadata
+.. _expandable: https://plonerestapi.readthedocs.io/en/latest/expansion.html
