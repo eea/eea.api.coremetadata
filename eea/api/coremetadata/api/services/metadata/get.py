@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+""" @metadata endpoint for Plone REST API """
 from zope.component import adapter
 from zope.interface import Interface
 from zope.interface import implementer
 
-from plone import api
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services import Service
 
@@ -19,8 +19,7 @@ class Metadata(object):
         self.context = context.aq_explicit
         self.request = request
 
-    def __call__(self, expand=True):
-
+    def __call__(self, *args, **kwargs):
         result = {
             "metadata": {
                 "@id": "{}/@metadata".format(
@@ -45,5 +44,6 @@ class MetadataGet(Service):
     """ @metadata endpoint implementation """
 
     def reply(self):
+        """ return the proper information in the API """
         service_factory = Metadata(self.context, self.request)
         return service_factory(expand=True)["metadata"]
