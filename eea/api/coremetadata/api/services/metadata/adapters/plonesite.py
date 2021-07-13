@@ -85,5 +85,5 @@ class PloneSiteCoreMetadataAdapter(BaseDexterityCoreMetadataAdapter):
         """ see ICoreMetadata"""
         if getSiteLogo is not None:
             return getSiteLogo()
-        else:
-            return "{}/logo.png".format(api.portal.get().absolute_url())
+
+        return "{}/logo.png".format(api.portal.get().absolute_url())
