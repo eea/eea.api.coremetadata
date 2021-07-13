@@ -34,6 +34,7 @@ class Metadata(object):
         #     return result
 
         core_metadata_adapter = ICoreMetadata(self.context)
+        #pylint: disable=too-many-function-args
         items = core_metadata_adapter.render_metadata()
 
         result["metadata"]["items"] = items
