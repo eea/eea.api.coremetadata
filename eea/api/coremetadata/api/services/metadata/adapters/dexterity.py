@@ -27,75 +27,93 @@ class BaseDexterityCoreMetadataAdapter(object):
         self.context = context
 
     def title(self):
+        """ see ICoreMetadata"""
         return self.context.Title()
 
     def abstract(self):
+        """ see ICoreMetadata"""
         return self.context.Description()
 
     def description(self):
+        """ see ICoreMetadata"""
         return self.context.Description()
 
     def creation_date(self):
+        """ see ICoreMetadata"""
         return self.context.creation_date.ISO8601()
 
     def issued_date(self):
+        """ see ICoreMetadata"""
         if self.context.effective and self.context.effective() != FLOOR_DATE:
             return self.context.effective().ISO8601()
 
         return None
 
     def expiration_date(self):
+        """ see ICoreMetadata"""
         if self.context.expires and self.context.expires() != CEILING_DATE:
             return self.context.expires().ISO8601()
 
         return None
 
     def topics(self):
+        """ see ICoreMetadata"""
         if self.context.subject:
             return self.context.subject
 
         return None
 
     def geo_coverage(self):
+        """ see ICoreMetadata"""
         return None
 
     def temporal_coverage(self):
+        """ see ICoreMetadata"""
         return None
 
     def content_type(self):
+        """ see ICoreMetadata"""
         return self.context.portal_type
 
     def provides(self):
+        """ see ICoreMetadata"""
         return [
             "{}.{}".format(I.__module__, I.__name__)
             for I in providedBy(self.context)
         ]
 
     def publisher(self):
+        """ see ICoreMetadata"""
         return None
 
     def data_provenance(self):
+        """ see ICoreMetadata"""
         return None
 
     def contributors(self):
+        """ see ICoreMetadata"""
         if self.context.contributors:
             return self.context.contributors
 
         return None
 
     def format(self):
+        """ see ICoreMetadata"""
         return None
 
     def word_count(self):
+        """ see ICoreMetadata"""
         return None
 
     def rights(self):
+        """ see ICoreMetadata"""
         if self.context.rights:
             return self.context.rights
 
         return None
 
     def depiction(self):
+        """ see ICoreMetadata"""
         if ILeadImageBehavior.providedBy(self.context):
             images_view = getMultiAdapter(
                 (self.context, self.request), name="images"
@@ -107,6 +125,7 @@ class BaseDexterityCoreMetadataAdapter(object):
         return None
 
     def render_metadata(self):
+        """ see ICoreMetadata"""
         data = {}
 
         data["title"] = self.title()
