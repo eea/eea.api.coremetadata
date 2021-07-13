@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Base core metadata interfaces"""
 from zope.interface import Interface
 
 
