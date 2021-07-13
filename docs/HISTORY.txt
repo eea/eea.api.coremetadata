@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0 - (2021-07-13)
+---------------------------
+* Change: remove unneeded include [erral]
+
 1.0-dev0 - (unreleased)
 -----------------------
 
