@@ -2,17 +2,27 @@
 """ Base core metadata adapter for dexterity content-types """
 from zope.component import adapter
 from zope.component import getMultiAdapter
+from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import providedBy
 
-from plone.app.contenttypes.behaviors.leadimage import (
-    ILeadImageBehavior,
-)
 from plone.dexterity.content import CEILING_DATE
 from plone.dexterity.content import FLOOR_DATE
 from plone.dexterity.interfaces import IDexterityContent
 
 from .interfaces import ICoreMetadata
+
+
+try:
+    from plone.app.contenttypes.behaviors.leadimage import (
+        ILeadImageBehavior,
+    )
+except ImportError:
+
+    class ILeadImageBehavior(Interface):
+        """ dummy marker interface for Plone 4 """
+
+        pass
 
 
 @implementer(ICoreMetadata)
