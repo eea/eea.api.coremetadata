@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-from .dexterity import BaseDexterityCoreMetadataAdapter
-from .interfaces import ICoreMetadata
+from zope.component import adapter
+from zope.interface import implementer
+
 from plone.dexterity.content import CEILING_DATE
 from plone.dexterity.content import FLOOR_DATE
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import getSiteLogo
-from zope.component import adapter
-from zope.interface import implementer
+
+from .dexterity import BaseDexterityCoreMetadataAdapter
+from .interfaces import ICoreMetadata
 
 
 @implementer(ICoreMetadata)

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-from .interfaces import ICoreMetadata
-from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
-from plone.dexterity.content import CEILING_DATE
-from plone.dexterity.content import FLOOR_DATE
-from plone.dexterity.interfaces import IDexterityContent
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.interface import implementer
 from zope.interface import providedBy
+
+from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
+from plone.dexterity.content import CEILING_DATE
+from plone.dexterity.content import FLOOR_DATE
+from plone.dexterity.interfaces import IDexterityContent
+
+from .interfaces import ICoreMetadata
 
 
 @implementer(ICoreMetadata)
@@ -62,7 +64,8 @@ class BaseDexterityCoreMetadataAdapter(object):
 
     def provides(self):
         return [
-            "{}.{}".format(I.__module__, I.__name__) for I in providedBy(self.context)
+            "{}.{}".format(I.__module__, I.__name__)
+            for I in providedBy(self.context)
         ]
 
     def publisher(self):
@@ -91,7 +94,9 @@ class BaseDexterityCoreMetadataAdapter(object):
 
     def depiction(self):
         if ILeadImageBehavior.providedBy(self.context):
-            images_view = getMultiAdapter((self.context, self.request), name="images")
+            images_view = getMultiAdapter(
+                (self.context, self.request), name="images"
+            )
             scale = images_view.scale("image", scale="preview")
             if scale:
                 return scale.url
