@@ -21,7 +21,7 @@ class EEAFixture(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         """Setup Plone"""
-        applyProfile(portal, "eea.api.coremetadata:default")
+        # applyProfile(portal, "eea.api.coremetadata:default")
 
         # Default workflow
         wftool = portal["portal_workflow"]
