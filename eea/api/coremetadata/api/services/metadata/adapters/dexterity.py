@@ -1,97 +1,134 @@
 # -*- coding: utf-8 -*-
-from .interfaces import ICoreMetadata
-from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
+""" Base core metadata adapter for dexterity content-types """
+from zope.component import adapter
+from zope.component import getMultiAdapter
+from zope.interface import Interface
+from zope.interface import implementer
+from zope.interface import providedBy
+
 from plone.dexterity.content import CEILING_DATE
 from plone.dexterity.content import FLOOR_DATE
 from plone.dexterity.interfaces import IDexterityContent
-from zope.component import adapter
-from zope.component import getMultiAdapter
-from zope.interface import implementer
-from zope.interface import providedBy
+
+from .interfaces import ICoreMetadata
+
+
+try:
+    from plone.app.contenttypes.behaviors.leadimage import (
+        ILeadImageBehavior,
+    )
+except ImportError:
+
+    class ILeadImageBehavior(Interface):
+        """ dummy marker interface for Plone 4 """
+
+        pass
 
 
 @implementer(ICoreMetadata)
 @adapter(IDexterityContent)
 class BaseDexterityCoreMetadataAdapter(object):
     """This is the base core metadata adapter.
-    When building a custom adapter for your content-type, just inherit from this,
-    modify the relevant method and register the adapter for your content-type.
+    When building a custom adapter for your content-type, just inherit from
+    this, modify the relevant method and register the adapter for your
+    content-type.
     """
 
     def __init__(self, context):
         self.context = context
 
     def title(self):
+        """ see ICoreMetadata"""
         return self.context.Title()
 
     def abstract(self):
+        """ see ICoreMetadata"""
         return self.context.Description()
 
     def description(self):
+        """ see ICoreMetadata"""
         return self.context.Description()
 
     def creation_date(self):
+        """ see ICoreMetadata"""
         return self.context.creation_date.ISO8601()
 
     def issued_date(self):
+        """ see ICoreMetadata"""
         if self.context.effective and self.context.effective() != FLOOR_DATE:
             return self.context.effective().ISO8601()
 
         return None
 
     def expiration_date(self):
+        """ see ICoreMetadata"""
         if self.context.expires and self.context.expires() != CEILING_DATE:
             return self.context.expires().ISO8601()
 
         return None
 
     def topics(self):
+        """ see ICoreMetadata"""
         if self.context.subject:
             return self.context.subject
 
         return None
 
     def geo_coverage(self):
+        """ see ICoreMetadata"""
         return None
 
     def temporal_coverage(self):
+        """ see ICoreMetadata"""
         return None
 
     def content_type(self):
+        """ see ICoreMetadata"""
         return self.context.portal_type
 
     def provides(self):
+        """ see ICoreMetadata"""
         return [
-            "{}.{}".format(I.__module__, I.__name__) for I in providedBy(self.context)
+            "{}.{}".format(I.__module__, I.__name__)
+            for I in providedBy(self.context)
         ]
 
     def publisher(self):
+        """ see ICoreMetadata"""
         return None
 
     def data_provenance(self):
+        """ see ICoreMetadata"""
         return None
 
     def contributors(self):
+        """ see ICoreMetadata"""
         if self.context.contributors:
             return self.context.contributors
 
         return None
 
     def format(self):
+        """ see ICoreMetadata"""
         return None
 
     def word_count(self):
+        """ see ICoreMetadata"""
         return None
 
     def rights(self):
+        """ see ICoreMetadata"""
         if self.context.rights:
             return self.context.rights
 
         return None
 
     def depiction(self):
+        """ see ICoreMetadata"""
         if ILeadImageBehavior.providedBy(self.context):
-            images_view = getMultiAdapter((self.context, self.request), name="images")
+            images_view = getMultiAdapter(
+                (self.context, self.request), name="images"
+            )
             scale = images_view.scale("image", scale="preview")
             if scale:
                 return scale.url
@@ -99,6 +136,7 @@ class BaseDexterityCoreMetadataAdapter(object):
         return None
 
     def render_metadata(self):
+        """ see ICoreMetadata"""
         data = {}
 
         data["title"] = self.title()

@@ -4,7 +4,7 @@
 
 
   <!-- Adapter for Plone Site Root -->
-  <adapter factory=".plone.PloneSiteCoreMetadataAdapter" />
+  <adapter factory=".plonesite.PloneSiteCoreMetadataAdapter" />
 
   <!-- Adapter for basic dexterity content -->
   <adapter factory=".dexterity.BaseDexterityCoreMetadataAdapter" />

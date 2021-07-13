@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+"""Base core metadata interfaces"""
 from zope.interface import Interface
 
 
 class ICoreMetadata(Interface):
-    """Base interface to provide core metadata fields for @metadata endpoint .
+    """Base interface to provide core metadata fields for @metadata endpoint.
 
     EEA Core Metadata list is here:
     https://taskman.eionet.europa.eu/projects/netpub/wiki/EEA_Core_Metadata
@@ -22,10 +23,12 @@ class ICoreMetadata(Interface):
         """ return the creation date of the item. ISO 8601 format."""
 
     def issued_date():
-        """ return the issued date (publication date, effective date). ISO 8601 format. """
+        """return the issued date (publication date, effective date).
+        ISO 8601 format."""
 
     def expiration_date():
-        """ OPTIONAL: return the expiration date of the item. ISO 8601 format. """
+        """OPTIONAL: return the expiration date of the item. ISO 8601
+        format."""
 
     def topics():
         """ return the list of topics of the item """
@@ -34,7 +37,8 @@ class ICoreMetadata(Interface):
         """ return the geocoverage of the item """
 
     def temporal_coverage():
-        """ return the years covered by the resource. It must be a list of years. Ex.: [2002, 2004] """
+        """return the years covered by the resource. It must be a list
+        of years. Ex.: [2002, 2004]"""
 
     def content_type():
         """ return the content-type id for the item """
@@ -43,7 +47,8 @@ class ICoreMetadata(Interface):
         """ return the interfaces provided by the item """
 
     def publisher():
-        """ return the information about the publisher of the item (normally the website owner)"""
+        """return the information about the publisher of the item (normally
+        the website owner)"""
 
     def data_provenance():
         """ return the data provenance information, it should be a list """
